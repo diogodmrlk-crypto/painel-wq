@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel AUXILIO - @ferraowq</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .panel {
+            background: #000;
+            width: 420px;
+            max-width: 100%;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(to right, #ff0000, #cc0000);
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            line-height: 1;
+        }
+
+        .tabs {
+            display: flex;
+            background: #1a1a1a;
+        }
+
+        .tab {
+            flex: 1;
+            background: #ff0000;
+            border: none;
+            color: white;
+            padding: 10px 6px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            transition: background 0.3s;
+            border-right: 2px solid #000;
+        }
+
+        .tab:last-child {
+            border-right: none;
+        }
+
+        .tab:hover {
+            background: #cc0000;
+        }
+
+        .tab.active {
+            background: #000;
+        }
+
+        .tab-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .content {
+            background: #000;
+            padding: 15px;
+            min-height: 300px;
+            border-radius: 0 0 18px 18px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group h3 {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-icon {
+            color: #ffff00;
+            font-size: 18px;
+        }
+
+        .option-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #ff0000;
+        }
+
+        .checkbox-item label {
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .color-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .color-box {
+            width: 35px;
+            height: 35px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid #333;
+        }
+
+        .color-option label {
+            color: #fff;
+            font-size: 13px;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <div class="header">
+            <h2>▶ PAINEL AUXILIO - @ferraowq</h2>
+            <button class="close-btn">×</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="openTab(event, 'rage')">
+                <img src="rage.png" alt="Rage" class="tab-icon">
+                Funções Rage
+            </button>
+            <button class="tab" onclick="openTab(event, 'visual')">
+                <img src="visual.png" alt="Visual" class="tab-icon">
+                Visual
+            </button>
+            <button class="tab" onclick="openTab(event, 'config')">
+                <img src="config.png" alt="Config" class="tab-icon">
+                Configurações
+            </button>
+            <button class="tab" onclick="openTab(event, 'info')">
+                <img src="info.png" alt="Info" class="tab-icon">
+                Info
+            </button>
+        </div>
+
+        <div class="content">
+            <div id="rage" class="tab-content active">
+                <div class="option-group">
+                    <h3><span class="warning-icon">⚠</span> Funções Rage</h3>
+                    <div class="option-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aimkill">
+                            <label for="aimkill">AimKill</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="teleport">
+                            <label for="teleport">Teleport 10m</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="voar">
+                            <label for="voar">Voar Player</label>
+                        </div>
+                    </div>
+                    <div class="option-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="speed">
+                            <label for="speed">Speed (?)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="norecoil">
+                            <label for="norecoil">No Recoil (?)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="visual" class="tab-content">
+                <div class="option-group">
+                    <h3>Personalização Visual</h3>
+                    <div class="option-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="esp">
+                            <label for="esp">ESP Ativo</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="box">
+                            <label for="box">Box ESP</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="line">
+                            <label for="line">Linha ESP</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="config" class="tab-content">
+                <div class="option-group">
+                    <h3>⚙ Personalização</h3>
+                    <div class="color-option">
+                        <input type="color" value="#ff0000" class="color-box" id="menuColor" onchange="changeMenuColor(this.value)">
+                        <label>Cor do Menu</label>
+                    </div>
+                    <div class="color-option">
+                        <input type="color" value="#00ff00" class="color-box" id="espVisibleColor" onchange="changeESPVisibleColor(this.value)">
+                        <label>Cor da ESP Visível</label>
+                    </div>
+                    <div class="color-option">
+                        <input type="color" value="#ff0000" class="color-box" id="espInvisibleColor" onchange="changeESPInvisibleColor(this.value)">
+                        <label>Cor da ESP Invisível</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="info" class="tab-content">
+                <div class="option-group">
+                    <h3>📋 Informações</h3>
+                    <p style="color: #fff; line-height: 1.6;">
+                        <strong>Versão:</strong> Auxilio v3.0<br>
+                        <strong>Status:</strong> Ativo<br>
+                        <strong>Desenvolvedor:</strong> FERRAOCHEATS<br><br>
+                        <strong>Aviso:</strong> Isto e apenas um auxilio que ira melhorar sua mira em 85% Use ciente disso.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            const tabs = document.getElementsByClassName('tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            alert('Painel fechado!');
+        });
+
+        // Funções para os color pickers
+        function changeMenuColor(color) {
+            // Muda a cor do header
+            document.querySelector('.header').style.background = `linear-gradient(to right, ${color}, ${adjustColor(color, -30)})`;
+            
+            // Muda a cor das abas
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                if (!tab.classList.contains('active')) {
+                    tab.style.background = color;
+                }
+            });
+            
+            console.log('Cor do menu alterada para:', color);
+        }
+
+        function changeESPVisibleColor(color) {
+            console.log('Cor da ESP Visível alterada para:', color);
+            // Aqui você pode adicionar lógica para mudar a cor do ESP visível no jogo
+            alert(`ESP Visível configurado para: ${color}`);
+        }
+
+        function changeESPInvisibleColor(color) {
+            console.log('Cor da ESP Invisível alterada para:', color);
+            // Aqui você pode adicionar lógica para mudar a cor do ESP invisível no jogo
+            alert(`ESP Invisível configurado para: ${color}`);
+        }
+
+        // Função auxiliar para ajustar o brilho da cor
+        function adjustColor(color, amount) {
+            const num = parseInt(color.replace("#", ""), 16);
+            const r = Math.max(0, Math.min(255, (num >> 16) + amount));
+            const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
+            const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
+            return "#" + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+        }
+
+        // Adiciona evento de hover nas abas para manter a cor personalizada
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active')) {
+                    const menuColor = document.getElementById('menuColor').value;
+                    this.style.background = adjustColor(menuColor, -20);
+                }
+            });
+            
+            tab.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    const menuColor = document.getElementById('menuColor').value;
+                    this.style.background = menuColor;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
